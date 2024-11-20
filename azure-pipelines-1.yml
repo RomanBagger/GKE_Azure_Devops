@@ -1,7 +1,10 @@
-trigger:
- branches:
-   include:
-     - main 
+# use with default work
+#trigger:
+# branches:
+#   include:
+#     - main
+
+trigger: none  #this for test, more confortable
 
 pool:
   name: 'Default'
