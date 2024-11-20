@@ -1,0 +1,35 @@
+trigger:
+ branches:
+   include:
+     - main 
+
+pool:
+  name: 'Default'
+  demands:
+    - agent.name -equals instance-20241104-101945
+
+variables:
+  GCP_SERVICE_CONNECTION: 'mygcpconnection'
+  Working_Directory: '$(System.DefaultWorkingDirectory)/applications'
+
+steps:
+
+- script: |
+    gcloud container clusters get-credentials $(CLUSTER_NAME) --zone $(ZONE) --project $(PROJECT)
+  workingDirectory: $(Working_Directory)
+  displayName: 'Terraform Init'
+
+- script: |
+    kubectl apply -f ingress.yaml 
+  workingDirectory: $(Working_Directory)
+  displayName: 'Deploy ingress rules'
+
+- script: |
+    helm install app1 ./app1/ 
+  workingDirectory: $(Working_Directory)
+  displayName: 'Deploy first application'
+
+- script: |
+    helm install app2 ./app2/ 
+  workingDirectory: $(Working_Directory)
+  displayName: 'Deploy second application'
