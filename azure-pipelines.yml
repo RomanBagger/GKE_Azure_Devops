@@ -18,12 +18,12 @@ steps:
   displayName: 'Terraform Init'
 
 - script: |
-    terraform plan -var-file=dev.tfvars -out=tfplan
+    terraform plan -var-file=dev.tfvars 
   workingDirectory: $(Working_Directory)
   displayName: 'Terraform Plan'
 
 - script: |
-    terraform apply -var-file=dev.tfvars -input=false -auto-approve tfplan
+    terraform apply -var-file=dev.tfvars -input=false -auto-approve 
   workingDirectory: $(Working_Directory)
   displayName: 'Terraform Apply'
 
