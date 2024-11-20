@@ -1,0 +1,4 @@
+container:
+  image: nginx:1.2.7
+
+replicaCount: 4

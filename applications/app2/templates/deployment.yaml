@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-deployment
+  labels:
+    app: {{ .Release.Name }}-tomcat
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-tomcat
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-tomcat
+    spec:
+      containers:
+      - name: {{ .Release.Name }}-tomcat
+        image: {{ .Values.container.image }}
+        ports:
+        - containerPort: 8080

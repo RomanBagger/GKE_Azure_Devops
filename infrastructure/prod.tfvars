@@ -1,0 +1,8 @@
+cluster_name = "prod-GKE-cluster"
+region = "us-east1"
+location = "us-east1-a"
+node_name = "prod-node-pool"
+machine_type = "e2-medium"
+environment = "prod"
+vpc_name = "prod-vpc"
+name_project = "velvety-gearbox-439710-c9"

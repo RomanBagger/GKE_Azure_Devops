@@ -1,0 +1,4 @@
+container:
+  image: tomcat:8.5.13
+
+replicaCount: 3
