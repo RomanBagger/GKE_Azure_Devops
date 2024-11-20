@@ -48,7 +48,7 @@ variable "vpc_name" {
 variable "subnet_name" {
   description = "Name of subnet"
   type = string
-  default = "cluster_subnet"
+  default = "cluster-subnet"
 }
 
 variable "subnet_cidr" {
@@ -72,19 +72,19 @@ variable "nat_ips_count" {
 variable "router_name" {
   description = "Name of router"
   type = string
-  default = "router_for_gke"
+  default = "router-for-gke"
 }
 
 variable "name_router_nat" {
   description = "Name of router_nat"
   type = string
-  default = "router_nat_for_gke"
+  default = "router-nat-for-gke"
 }
 
 variable "name_firewall" {
   description = "Name of the firewall"
   type = string
-  default = "firewall_cluster"
+  default = "firewall-cluster"
 }
 
 variable "name_project" {
