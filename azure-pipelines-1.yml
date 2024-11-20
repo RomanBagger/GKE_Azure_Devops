@@ -17,7 +17,7 @@ steps:
 - script: |
     gcloud container clusters get-credentials $(CLUSTER_NAME) --zone $(ZONE) --project $(PROJECT)
   workingDirectory: $(Working_Directory)
-  displayName: 'Terraform Init'
+  displayName: 'Connection to GKE'
 
 - script: |
     kubectl apply -f ingress.yaml 
