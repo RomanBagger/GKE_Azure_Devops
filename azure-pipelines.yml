@@ -1,0 +1,33 @@
+trigger: none  
+
+pool:
+  name: 'Default'
+  demands:
+    - agent.name -equals instance-20241104-101945
+
+variables:
+  GCP_SERVICE_CONNECTION: 'mygcpconnection'
+  Working_Directory: '$(System.DefaultWorkingDirectory)/infrastructure'
+  Project_GCP: 'velvety-gearbox-439710-c9'
+
+steps:
+
+- script: |
+    terraform init -input=false
+  workingDirectory: $(Working_Directory)
+  displayName: 'Terraform Init'
+
+- script: |
+    terraform plan -var-file=dev.tfvars -out=tfplan
+  workingDirectory: $(Working_Directory)
+  displayName: 'Terraform Plan'
+
+- script: |
+    terraform apply -var-file=dev.tfvars -input=false -auto-approve tfplan
+  workingDirectory: $(Working_Directory)
+  displayName: 'Terraform Apply'
+
+#- script: |
+#    terraform destroy -input=false -auto-approve 
+#  workingDirectory: $(Working_Directory)
+#  displayName: 'Terraform destroy'
