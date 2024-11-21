@@ -1,0 +1,6 @@
+ingress:
+  name: nginx-ing
+  namespace: default
+spec:
+  ServiceName1: nginx
+  ServiceName2: tomcat
