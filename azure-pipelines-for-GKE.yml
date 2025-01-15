@@ -3,7 +3,7 @@ trigger: none
 pool:
   name: 'Default'
   demands:
-    - agent.name -equals instance-20241104-101945
+    - agent.name -equals instance-20250115-185328
 
 variables:
   GCP_SERVICE_CONNECTION: 'mygcpconnection'
