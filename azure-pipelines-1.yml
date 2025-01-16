@@ -1,0 +1,53 @@
+# use with default work
+#trigger:
+# branches:
+#   include:
+#     - main
+
+trigger: none  #this for test, more confortable
+
+pool:
+  name: 'Default'
+  demands:
+    - agent.name -equals instance-20250115-185328
+
+variables:
+  GCP_SERVICE_CONNECTION: 'mygcpconnection'
+  Working_Directory: '$(System.DefaultWorkingDirectory)/applications'
+
+steps:
+
+- script: |
+    gcloud container clusters get-credentials $(CLUSTER_NAME) --zone $(ZONE) --project $(PROJECT)
+  workingDirectory: $(Working_Directory)
+  displayName: 'Connection to GKE'
+
+- script: |
+    terraform init -input=false
+  workingDirectory: '$(Working_Directory)/ingress_rules'
+  displayName: 'Terraform Init for app1'
+
+- script: |
+    terraform apply -input=false -auto-approve 
+  workingDirectory: '$(Working_Directory)/ingress_rules'
+  displayName: 'Deploy first application'
+
+- script: |
+    terraform init -input=false
+  workingDirectory: '$(Working_Directory)/app1'
+  displayName: 'Terraform Init for app2'
+
+- script: |
+    terraform apply -input=false -auto-approve
+  workingDirectory: '$(Working_Directory)/app1'
+  displayName: 'Deploy second application'
+
+- script: |
+    terraform init -input=false
+  workingDirectory: '$(Working_Directory)/app2'
+  displayName: 'Terraform Init for app2'
+
+- script: |
+    terraform apply -input=false -auto-approve
+  workingDirectory: '$(Working_Directory)/app2'
+  displayName: 'Deploy second application'
