@@ -19,3 +19,14 @@ spec:
         image: {{ .Values.container.image }}
         ports:
         - containerPort: 8080
+        env:
+        - name: TOMCAT_USERNAME
+          value: "admin" 
+        - name: TOMCAT_PASSWORD
+          value: "admin123" 
+        - name: ALLOW_EMPTY_PASSWORD
+          value: "no" 
+        - name: NAMI_LOG_LEVEL
+          value: "INFO"
+        - name: BITNAMI_DEBUG
+          value: "false"
