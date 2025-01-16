@@ -8,8 +8,8 @@ provider "helm" {
   }
 }
 
-resource "helm_release" "app1" {
-  name       = "ingress_rules"
+resource "helm_release" "ingress_rules" {
+  name       = "ingress-rules"
   chart      = "${path.module}/helm_chart"
   namespace  = "default"
 
