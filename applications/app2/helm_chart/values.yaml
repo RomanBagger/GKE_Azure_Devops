@@ -1,5 +1,4 @@
 container:
-  #image: tomcat:8.5.13
-  image: tomcat:7
+  image: tomcat:8.5.13
   
 replicaCount: 1
