@@ -1,4 +1,4 @@
 container:
-  image: tomcat:7
+  image: bitnami/tomcat:9.0
   
 replicaCount: 1
