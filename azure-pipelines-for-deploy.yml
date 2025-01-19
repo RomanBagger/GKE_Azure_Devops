@@ -23,16 +23,16 @@ steps:
   displayName: 'Connection to GKE'
 
 - script: |
-    kubectl apply -f ingress.yaml 
+    helm upgrade --install ingress ingress_rules/helm_chart  
   workingDirectory: $(Working_Directory)
   displayName: 'Deploy ingress rules'
 
 - script: |
-    helm install app1 ./app1/ 
+    helm upgrade --install nginx app1/helm_chart
   workingDirectory: $(Working_Directory)
   displayName: 'Deploy first application'
 
 - script: |
-    helm install app2 ./app2/ 
+    helm upgrade --install tomcat app2/helm_chart 
   workingDirectory: $(Working_Directory)
   displayName: 'Deploy second application'
