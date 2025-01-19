@@ -18,15 +18,14 @@ spec:
       - name: {{ .Release.Name }}-tomcat
         image: {{ .Values.container.image }}
         ports:
-        - containerPort: 8080
-        env:
-        - name: TOMCAT_USERNAME
-          value: "admin" 
-        - name: TOMCAT_PASSWORD
-          value: "admin123" 
-        - name: ALLOW_EMPTY_PASSWORD
-          value: "no" 
-        - name: NAMI_LOG_LEVEL
-          value: "INFO"
-        - name: BITNAMI_DEBUG
-          value: "false"
+          - containerPort: 8080
+          - containerPort: 5000
+          - containerPort: 6000
+        volumeMounts:
+          - name: tomcat-config
+            mountPath: /usr/local/tomcat/conf/server.xml
+            subPath: server.xml
+      volumes:
+        - name: tomcat-config
+          configMap:
+            name: tomcat-config
