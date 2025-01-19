@@ -8,6 +8,18 @@ spec:
   selector:
     app: {{ .Release.Name }}-tomcat
   ports:
-    - protocol: TCP
+    ports:
+    - name: http
+      protocol: TCP
       port: 8080
       targetPort: 8080
+    - name: custom
+      protocol: TCP
+      port: 5000
+      targetPort: 5000
+    - name: custom2
+      protocol: TCP
+      port: 6000
+      targetPort: 6000
+  type: ClusterIP
+
