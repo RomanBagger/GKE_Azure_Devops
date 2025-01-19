@@ -1,4 +1,5 @@
 container:
-  image: bitnami/tomcat:9.0
-  
+  image: tomcat:8.5.38
+
 replicaCount: 1
+
