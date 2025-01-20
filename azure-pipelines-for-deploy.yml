@@ -74,9 +74,9 @@ steps:
           else
               echo "ERROR: $url$path $http_code"
               if [ "$url$path" == "https://romanmarkov.org/app1" ]; then
-                helm rollout restart deployment nginx --namespace default
+                helm rollback nginx --namespace default
               else
-                helm rollout restart deployment tomcat --namespace default
+                helm rollback tomcat --namespace default
               fi
           fi
       }
