@@ -3,4 +3,4 @@ container:
 
 replicaCount: 1
 service:
-  name: nginq
+  name: nginx
