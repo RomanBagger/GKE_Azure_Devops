@@ -54,6 +54,7 @@ steps:
     targetType: 'inline'
     script: |
       #!/bin/bash
+      sleep 20
       BASE_URL="https://romanmarkov.org"
       PATHS=(
           "/app1"
