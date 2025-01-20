@@ -47,7 +47,7 @@ steps:
         exit 1
       fi
     done
-  displayName: 'Check Helm Deployment Status'
+  displayName: 'Helm deployed currectly'
 
 - task: Bash@3
   inputs:
