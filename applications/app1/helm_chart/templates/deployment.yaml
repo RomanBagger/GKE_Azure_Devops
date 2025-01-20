@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: {{ .Release.Name }}-nginx
-        image: {{ .Values.container.image }}
+        image: {{ .Values.container.imageу } }}
         ports:
         - containerPort: 80
