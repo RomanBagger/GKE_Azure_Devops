@@ -1,4 +1,4 @@
 container:
-  image: nginx:latets 
+  image: nginx:latest
 
 replicaCount: 1
