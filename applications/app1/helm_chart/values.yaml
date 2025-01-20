@@ -1,4 +1,4 @@
 container:
-  image: nginx:latestвыфв
+  image: nginx:latest
 
 replicaCount: 1
