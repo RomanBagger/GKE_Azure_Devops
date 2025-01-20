@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: tomcat
+  name: {{ .Values.service.name }}
   labels:
     owner: RamanMarkau
 spec:
