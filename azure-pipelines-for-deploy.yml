@@ -1,10 +1,4 @@
-# use with default work
-#trigger:
-# branches:
-#   include:
-#     - main
-
-trigger: none  #this for test, more confortable
+trigger: none  #this for test, more comfortable
 
 pool:
   name: 'Default'
@@ -53,49 +47,43 @@ steps:
         exit 1
       fi
     done
+  displayName: 'Check Helm Deployment Status'
 
 - task: Bash@3
   inputs:
     targetType: 'inline'
     script: |
-      - task: Bash@3
-            inputs:
-              targetType: 'inline'
-              script: |
-                #!/bin/bash
-                
-                BASE_URL="https://romanmarkov.org"
-                PATHS=(
-                    "/app1"
-                    "/app2"
-                    "/port5000"
-                    "/port6000"
-                )
-      
-                check_path() {
-                    local url=$1
-                    local path=$2
-                    echo "Проверка пути: $url$path"
-                    
-                    http_code=$(curl --write-out "%{http_code}" --silent --output /dev/null "$url$path")
-                    
-                    if [ "$http_code" -eq 200 ]; then
-                        echo "OK: $url$path $http_code"
-                    else
-                        echo "ERROR: $url$path $http_code"
-                        if [ "$url$path" == "https://romanmarkov.org/app1" ]; then
-                          helm rollout restart deployment nginx --namespace default
-                        else
-                          helm rollout restart deployment tomcat --namespace default
-                        fi
-                    fi
-                }
-                
-                for path in "${PATHS[@]}"; do
-                    check_path $BASE_URL $path
-                done
-      
-          echo "All services are deployed and accessible."
-      
-        workingDirectory: $(Working_Directory)
-        displayName: 'Verify Deployment and Rollback if Necessary'
+      #!/bin/bash
+      BASE_URL="https://romanmarkov.org"
+      PATHS=(
+          "/app1"
+          "/app2"
+          "/port5000"
+          "/port6000"
+      )
+
+      check_path() {
+          local url=$1
+          local path=$2
+          echo "Проверка пути: $url$path"
+
+          http_code=$(curl --write-out "%{http_code}" --silent --output /dev/null "$url$path")
+
+          if [ "$http_code" -eq 200 ]; then
+              echo "OK: $url$path $http_code"
+          else
+              echo "ERROR: $url$path $http_code"
+              if [ "$url$path" == "https://romanmarkov.org/app1" ]; then
+                helm rollout restart deployment nginx --namespace default
+              else
+                helm rollout restart deployment tomcat --namespace default
+              fi
+          fi
+      }
+
+      for path in "${PATHS[@]}"; do
+          check_path $BASE_URL $path
+      done
+
+      echo "All services are deployed and accessible."
+  displayName: 'Verify Deployment and Rollback if Necessary'
